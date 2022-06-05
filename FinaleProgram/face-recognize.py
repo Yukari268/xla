@@ -35,4 +35,4 @@ if __name__ == "__main__":
     elif args.command == 'test':
         tester = controller.getTester()
         tester.loadModel("./knn.pkl")
-        tester.indentifyImage(imgUrl= args.pictureUrl, mydict=['BanNinh01','MinhNhat1','TanTin1','TrongHuy1','XuanPhuc1'])
+        tester.indentifyImage(imgUrl= args.pictureUrl, mydict=['BanNinh01','BanThanh01','CongDanh1','GiaQuang','HoaiBao','HoangLong1','HoangNhat1','KimHung1','MinhHien1','MinhHieu1','MinhHoa1','MinhNhat1','MyLinh01','TanTin1','ThanhLoi1','ThanhTung1','ThuyLinh1','TrongHuy1','XuanPhuc1'])
