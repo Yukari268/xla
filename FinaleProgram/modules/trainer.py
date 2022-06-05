@@ -28,6 +28,9 @@ class IdentityMetadata():
     def image_path(self):
         return os.path.join(self.base, self.name, self.file)    
 class DataLoader():
+    """
+    This class responsibility is for loading Data
+    """
     def __init__(self) -> None:
         pass
     def load_metadata(self,path):
@@ -46,6 +49,9 @@ class DataLoader():
         # in BGR order. So we need to reverse them
         return img[...,::-1]
 class Loader():
+    """
+    This class responsibility is for loading Picture, Weights and OpenFace face alignment utility
+    """
     def __init__(self, dataloader : DataLoader) :
         self.nn4_small2_pretrained = create_model()
         self.nn4_small2_pretrained.load_weights('modules/dependencies/weights/nn4.small2.v1.h5')
@@ -68,6 +74,9 @@ class Loader():
         # Transform image using specified face landmark indices and crop image to 96x96
         return self.alignment.align(size, jc_orig, bb, landmarkIndices=AlignDlib.OUTER_EYES_AND_NOSE)
 class Displayer():
+    """
+    This class responsibility is displaying picture in certain form
+    """
     def __init__(self):
         pass
     def showImage(self, jc_orig, size=131):
@@ -146,6 +155,9 @@ class Displayer():
     def run(self):
         plt.show()
 class Trainer():
+    """
+    This class responsibility is training and save our model
+    """
     def __init__(self, dataloader : DataLoader):
         self.nn4_small2_pretrained = create_model()
         self.nn4_small2_pretrained.load_weights('modules/dependencies/weights/nn4.small2.v1.h5')
@@ -237,6 +249,9 @@ class Trainer():
         joblib.dump(self.svc,'svc.pkl')
         joblib.dump(self.knn,'knn.pkl')
 class Tester():
+    """
+    This class responsibility is testing
+    """
     def __init__(self,dataloader : DataLoader,trainer : Trainer,loader : Loader):
         self.dtloader = dataloader
         self.trainer = trainer
@@ -265,7 +280,14 @@ class Tester():
         self.trainer.svc = joblib.load(path)
 class Controller():
     """
-    self.dtloader : DataLoader()
+    This class contains serveral class like
+    DataLoader,
+    Loader,
+    Displayer,
+    Trainer,
+    Tester
+
+    and use them as utility to control the app
     """
     def __init__(self) -> None:
         self.dtloader = DataLoader()

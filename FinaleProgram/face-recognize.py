@@ -14,11 +14,10 @@ if __name__ == "__main__":
 
     #vidtopics arguments
     vidtopics.add_argument('videourl', type=str)
-    vidtopics.add_argument('--destination','--d','--dest', type=str, required=False)
 
     #test arguments
     test.add_argument('pictureUrl', type=str)
-
+    test.add_argument('--algorithm','--al', type=str, default='knn', const='knn', nargs="?")
     args = parser.parse_args()
     controller = Controller()
 
@@ -34,5 +33,5 @@ if __name__ == "__main__":
         print("Trained")
     elif args.command == 'test':
         tester = controller.getTester()
-        tester.loadModel("./knn.pkl")
+        tester.loadModel("./knn.pkl") if (args.algorithm == 'knn') else tester.loadModel("./svc.pkl")
         tester.indentifyImage(imgUrl= args.pictureUrl, mydict=['BanNinh01','BanThanh01','CongDanh1','GiaQuang','HoaiBao','HoangLong1','HoangNhat1','KimHung1','MinhHien1','MinhHieu1','MinhHoa1','MinhNhat1','MyLinh01','TanTin1','ThanhLoi1','ThanhTung1','ThuyLinh1','TrongHuy1','XuanPhuc1'])
